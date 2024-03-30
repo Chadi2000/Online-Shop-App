@@ -22,8 +22,10 @@ class DetailsScreen extends StatelessWidget {
 
   AppBar buildAppBar(BuildContext context){
     return AppBar(
+      backgroundColor: product.color,
       leading: IconButton(
-        icon: SvgPicture.asset('assets/icons/back.svg'),
+        color: Colors.white,
+        icon: const Icon(Icons.keyboard_return),
         onPressed: (){
           Navigator.pop(context);
         },
@@ -32,11 +34,12 @@ class DetailsScreen extends StatelessWidget {
         IconButton(
           onPressed: (){},
           icon: const Icon(Icons.search),
-          color: kTextColor,
+          color: Colors.white,
         ),
         IconButton(
           onPressed: (){},
           icon: const Icon(Icons.add_shopping_cart),
+          color: Colors.white,
         ),
         SizedBox(width: kDefaultPaddin/2,)
       ],
