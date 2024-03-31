@@ -4,7 +4,13 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/Product.dart';
+import 'package:shop_app/screens/details/components/color_and_size.dart';
 import 'package:shop_app/screens/details/components/product_title_with_image.dart';
+
+import 'add_to_cart.dart';
+import 'cart_counter.dart';
+import 'counter_with_fav_btn.dart';
+import 'description.dart';
 
 class Body extends StatelessWidget {
   final Product product;
@@ -33,42 +39,23 @@ class Body extends StatelessWidget {
                   ),
                   child: Column(
                     children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text('Color:'),
-                                Row(
-                                  children: <Widget>[
-                                    ColorDot(color: product.color,isSelected: true,),
-                                    ColorDot(color: Color(0xFFF8C078),),
-                                    ColorDot(color: Color(0xFFA29B9B),),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: RichText(
-                                text: TextSpan(
-                              style: TextStyle(color: kTextColor),
-                              children: [
-                                TextSpan(text: 'Size:\n'),
-                                TextSpan(text:"${product.size} Cm", style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 24
-                                )),
-                              ]
-                            )),
-                          )
-                        ],
-                      )
+                      ColorAndSize(product: product),
+                      SizedBox(height: 10,),
+                      Description(product: product),
+                      SizedBox(height: 10,),
+                      CounterWithFavBtn(),
+                      SizedBox(height: 10,),
+                      AddToCart(product: product)
+                      
+                      
+
+                     
+
                     ],
                   ),
                 ),
-                ProductTitleWithImage(product: product,)
+                ProductTitleWithImage(product: product,),
+
 
               ],
             ),
@@ -79,40 +66,14 @@ class Body extends StatelessWidget {
   }
 }
 
-class ColorDot extends StatelessWidget {
-  final Color color;
-  final bool isSelected;
-  const ColorDot({
-    super.key,
-    required this.color,
-    this.isSelected =false
-  });
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(2.5),
-      margin: EdgeInsets.only(
-          top: 5,
-          right: 10
-      ),
-      height: 24,
-      width: 24,
-      decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(
-            color: isSelected ? color : Colors.transparent,
-          )
-      ),
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-            color: color,
-            shape: BoxShape.circle
-        ),
-      ),
-    );
-  }
-}
+
+
+
+
+
+
+
 
 
 
